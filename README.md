@@ -1,5 +1,6 @@
 # sbt-aws-lambda
 
+[![Build Status](https://app.wercker.com/status/937388cb18834f150a05e5d91defc89a/s/master)](https://app.wercker.com/project/byKey/937388cb18834f150a05e5d91defc89a)
 [![Download](https://api.bintray.com/packages/plippe/sbt/sbt-aws-lambda/images/download.svg)](https://bintray.com/plippe/sbt/sbt-aws-lambda/_latestVersion)
 
 Sbt plugin to publish code to [AWS Lambda][aws-lambda].
