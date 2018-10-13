@@ -12,7 +12,6 @@ libraryDependencies ++= Seq(
 
 testFrameworks += new TestFramework("utest.runner.Framework")
 
-scalacOptions ++= ScalacOptions.tpolecat
 scalafmtOnCompile := true
 
 organization := "com.github.plippe"
