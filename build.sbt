@@ -2,7 +2,7 @@ sbtPlugin := true
 
 libraryDependencies ++= Seq(
   "com.amazonaws" % "aws-java-sdk-lambda" % "1.11.410",
-  "com.lihaoyi" %% "utest" % "0.6.3" % Test,
+  "com.lihaoyi" %% "utest" % "0.6.5" % Test,
   Defaults.sbtPluginExtra(
        "com.eed3si9n" % "sbt-assembly" % "0.14.7",
        (sbtBinaryVersion in pluginCrossBuild).value,

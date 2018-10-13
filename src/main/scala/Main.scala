@@ -18,40 +18,41 @@ object Main {
     }.toEither
 
   def updateFunctionCode(
-      client: AwsLambdaWrapper,
+      awsLambda: AwsLambdaWrapper,
       name: String,
-      file: File): Either[Throwable, UpdateFunctionCodeResult] = {
-    fileToBuffer(file)
-      .map { buffer =>
-        new UpdateFunctionCodeRequest()
-          .withFunctionName(name)
-          .withZipFile(buffer)
-      }
-      .flatMap(client.updateFunctionCode)
+      buffer: ByteBuffer): Either[Throwable, UpdateFunctionCodeResult] = {
+
+    val request = new UpdateFunctionCodeRequest()
+      .withFunctionName(name)
+      .withZipFile(buffer)
+
+    awsLambda.updateFunctionCode(request)
   }
 
   def publishVersion(
-      client: AwsLambdaWrapper,
+      awsLambda: AwsLambdaWrapper,
       name: String,
       revisionId: String,
       version: String): Either[Throwable, PublishVersionResult] = {
+
     val request = new PublishVersionRequest()
       .withFunctionName(name)
       .withRevisionId(revisionId)
       .withDescription(version)
 
-    client.publishVersion(request)
+    awsLambda.publishVersion(request)
   }
 
-  def run(plugin: AssemblyPluginWrapper,
-          client: AwsLambdaWrapper,
+  def run(assemblyPlugin: AssemblyPluginWrapper,
+          awsLambda: AwsLambdaWrapper,
           name: String,
           version: String): Either[Throwable, Unit] = {
 
     for {
-      file <- plugin.assembly
-      result <- updateFunctionCode(client, name, file)
-      _ <- publishVersion(client, name, result.getRevisionId(), version)
+      file <- assemblyPlugin.assembly
+      buffer <- fileToBuffer(file)
+      result <- updateFunctionCode(awsLambda, name, buffer)
+      _ <- publishVersion(awsLambda, name, result.getRevisionId(), version)
     } yield ()
 
   }
