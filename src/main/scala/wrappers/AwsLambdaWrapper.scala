@@ -4,6 +4,9 @@ import com.amazonaws.services.lambda.AWSLambda
 import com.amazonaws.services.lambda.model._
 import scala.util.Try
 
+import com.github.plippe.implicits._
+trait Scala212 { avoidUnusedImport() }
+
 trait AwsLambdaWrapper {
   def updateFunctionCode(request: UpdateFunctionCodeRequest)
     : Either[Throwable, UpdateFunctionCodeResult]

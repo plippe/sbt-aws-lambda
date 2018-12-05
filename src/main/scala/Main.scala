@@ -4,6 +4,8 @@ import java.nio.ByteBuffer
 import scala.util.Try
 
 import com.github.plippe._
+import com.github.plippe.implicits._
+trait Scala212_Main { avoidUnusedImport() }
 
 object Main {
 

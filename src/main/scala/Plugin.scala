@@ -5,6 +5,8 @@ import sbtassembly.AssemblyPlugin
 import scala.util.Try
 
 import com.github.plippe._
+import com.github.plippe.implicits._
+trait Scala212_Plugin { avoidUnusedImport() }
 
 trait AwsLambdaKeys {
 
@@ -29,7 +31,7 @@ object AwsLambdaPlugin extends AutoPlugin {
 
   def awsLambdaProjectSettings: Seq[Setting[_]] = Seq(
     awsLambdaClient := AWSLambdaClientBuilder.defaultClient(),
-    awsLambdaUpdateFunctionCode := updateFunctionCode.value,
+    awsLambdaUpdateFunctionCode := updateFunctionCode.value
   )
 
   def updateFunctionCode = Def.task {
